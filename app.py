@@ -8,6 +8,7 @@ import nltk
 # Download NLTK data (runs only if not downloaded)
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('punkt_tab')
 
 from sklearn.preprocessing import LabelEncoder
 
