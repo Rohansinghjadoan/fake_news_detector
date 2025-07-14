@@ -13,7 +13,7 @@ from sklearn.preprocessing import LabelEncoder
 
 # Load models
 tfidf = joblib.load('models/tfidf_vectorizer.pkl')
-svm_model = joblib.load('models/SVM_model.pkl')
+svm_model = joblib.load('models/svm_model.pkl')
 xgb_model = joblib.load('models/xgboost_model.pkl')
 label_encoder = joblib.load('models/label_encoder.pkl')
 
