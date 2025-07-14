@@ -3,6 +3,11 @@ import joblib
 import re
 import nltk
 import numpy as np
+import nltk
+
+# Download NLTK data (runs only if not downloaded)
+nltk.download('punkt')
+nltk.download('stopwords')
 
 from sklearn.preprocessing import LabelEncoder
 
