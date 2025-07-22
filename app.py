@@ -18,21 +18,28 @@ svm_model = joblib.load('models/svm_model.pkl')
 xgb_model = joblib.load('models/xgboost_model.pkl')
 label_encoder = joblib.load('models/label_encoder.pkl')
 
-stemmer = nltk.PorterStemmer()
-stop_words = set(nltk.corpus.stopwords.words('english'))
+
 
 # ------------------ CONFIG ------------------
 st.set_page_config(page_title="📰 Political Fake News Detector", page_icon="📰", layout="centered")
 
 st.title("📰 Political Fake News Classifier")
-st.markdown("**Trained on LIAR Dataset (PolitiFact)** - Classify if a political statement is *fake* or *true* with ~80% accuracy!")
+st.markdown("**Trained on LIAR Dataset (PolitiFact)** - Classify if a political statement is *fake* or *true*!")
 
 # ------------------ CLEAN FUNCTION ------------------
+
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
+
 def clean(text):
     text = str(text).lower()
-    text = re.sub(r'[^a-z\s]', '', text)
-    tokens = nltk.word_tokenize(text)
-    tokens = [stemmer.stem(w) for w in tokens if w not in stop_words]
+    text = re.sub(r'[^a-z\s]', '', text)  # Remove punctuations
+    tokens = text.split()  # Faster than nltk.word_tokenize
+    
+    tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]
     return ' '.join(tokens)
 
 # ------------------ SIDEBAR ------------------
